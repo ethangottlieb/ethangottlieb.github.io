@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Games by Ethan Gottlieb</title>
-<meta name="description" content="RoYgBv, Sky Dye and Side Slide: free puzzle games for iPhone, iPad and Android.">
+<meta name="description" content="RoYgBv, Sky Dye and Side Slide: free puzzle games for iPhone, iPad and Android, now in nine languages.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://ethangottlieb.github.io/">
 <meta property="og:title" content="Games by Ethan Gottlieb">
@@ -13,66 +13,161 @@
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
-<link rel="stylesheet" href="privacy/style.css">
 <style>
-  .game { display: grid; grid-template-columns: 96px minmax(0, 1fr); gap: 4px 20px; padding: 24px 0; border-bottom: 1px solid var(--rule); }
-  .game img { width: 96px; height: 96px; border-radius: 22px; grid-row: 1 / span 4; box-shadow: 0 2px 8px rgba(0, 0, 0, .18); }
-  .game > :not(img) { grid-column: 2; }
-  .game:last-of-type { border-bottom: 0; }
-  .game h2 { margin: 2px 0 0; }
-  .game p { margin: 0; color: var(--soft); }
-  .stores { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
-  .stores a { padding: 7px 14px; border: 1px solid var(--rule); border-radius: 999px; text-decoration: none; font-weight: 600; font-size: 15px; }
-  .stores a:hover { border-color: var(--link); }
-  .more { margin-top: 10px; font-size: 15px; color: var(--soft); }
-  @media (max-width: 480px) {
-    .game { grid-template-columns: 64px minmax(0, 1fr); gap: 4px 14px; }
-    .game img { width: 64px; height: 64px; border-radius: 15px; grid-row: 1 / span 2; }
-    .game .stores, .game .more { grid-column: 1 / -1; }
+  :root {
+    --bg: #f6f5f2; --card: #ffffff; --ink: #1d1d22; --soft: #5f5f6a; --rule: #e4e2dc; --link: #2f5fd0;
+    --hero-a: #1b1530; --hero-b: #2c2350; --hero-ink: #ffffff; --hero-soft: #c9c4e6;
+    --shadow: 0 10px 30px rgba(20, 16, 40, .12);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #121218; --card: #1b1b23; --ink: #f1f0f5; --soft: #a9a8b8; --rule: #2c2b36; --link: #8fb0ff;
+      --hero-a: #0d0a1c; --hero-b: #1f1840; --shadow: 0 10px 30px rgba(0, 0, 0, .45);
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #121218; --card: #1b1b23; --ink: #f1f0f5; --soft: #a9a8b8; --rule: #2c2b36; --link: #8fb0ff;
+    --hero-a: #0d0a1c; --hero-b: #1f1840; --shadow: 0 10px 30px rgba(0, 0, 0, .45);
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--ink); font: 17px/1.55 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+  a { color: var(--link); }
+
+  .hero { background: linear-gradient(160deg, var(--hero-a), var(--hero-b)); color: var(--hero-ink); padding: 56px 16px 64px; text-align: center; overflow: hidden; position: relative; }
+  .hero::after { content: ""; position: absolute; inset: auto 0 0 0; height: 6px;
+    background: linear-gradient(90deg, #e94b57, #f39a2d, #f2d13b, #4caf50, #4b6bf5, #a35cd1); }
+  .icons { display: flex; justify-content: center; gap: 18px; margin-bottom: 26px; }
+  .icons img { width: 84px; height: 84px; border-radius: 19px; box-shadow: 0 8px 24px rgba(0, 0, 0, .35); }
+  .icons img:nth-child(1) { transform: rotate(-6deg); }
+  .icons img:nth-child(3) { transform: rotate(6deg); }
+  .hero h1 { font-size: clamp(30px, 6vw, 46px); line-height: 1.1; margin: 0 0 12px; letter-spacing: -.02em; }
+  .hero p { margin: 0 auto; max-width: 560px; color: var(--hero-soft); font-size: 18px; }
+  .langs { display: inline-block; margin-top: 18px; padding: 6px 14px; border-radius: 999px; background: rgba(255, 255, 255, .1); color: var(--hero-ink); font-size: 15px; }
+
+  main { max-width: 980px; margin: 0 auto; padding: 40px 16px 24px; }
+  .game { display: grid; grid-template-columns: 300px minmax(0, 1fr); gap: 36px; align-items: center; background: var(--card);
+    border-radius: 24px; padding: 32px; margin-bottom: 32px; box-shadow: var(--shadow); border-top: 5px solid var(--accent); }
+  .game.wide { grid-template-columns: minmax(0, 1fr); }
+  .media { display: flex; justify-content: center; }
+  .media video { display: block; width: 100%; background: #000; }
+  .phone video { max-width: 260px; border-radius: 28px; border: 6px solid #111; }
+  .wide .media video { border-radius: 18px; max-width: 760px; }
+  .title { display: flex; align-items: center; gap: 14px; margin-bottom: 8px; }
+  .title img { width: 56px; height: 56px; border-radius: 13px; }
+  .title h2 { margin: 0; font-size: 28px; letter-spacing: -.01em; }
+  .pitch { margin: 0 0 14px; font-size: 19px; }
+  .facts { margin: 0 0 20px; padding: 0; list-style: none; color: var(--soft); }
+  .facts li { padding-left: 22px; position: relative; margin-bottom: 6px; }
+  .facts li::before { content: ""; position: absolute; left: 4px; top: .62em; width: 8px; height: 8px; border-radius: 50%; background: var(--accent); }
+  .badges { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; }
+  .badges img { height: 48px; display: block; }
+  .badges .play img { height: 71px; margin: -11px -10px; }
+  .more { margin: 14px 0 0; font-size: 15px; color: var(--soft); }
+  .more a { margin-right: 4px; }
+
+  footer { max-width: 980px; margin: 0 auto; padding: 8px 16px 56px; color: var(--soft); font-size: 15px; text-align: center; }
+
+  @media (max-width: 720px) {
+    .game { grid-template-columns: minmax(0, 1fr); padding: 22px 18px; gap: 22px; }
+    .phone video { max-width: 220px; }
+    .icons img { width: 64px; height: 64px; border-radius: 15px; }
   }
 </style>
 </head>
 <body>
+<header class="hero">
+  <div class="icons">
+    <img src="img/roygbv.webp" alt="RoYgBv icon">
+    <img src="img/sky-dye.webp" alt="Sky Dye icon">
+    <img src="img/side-slide.webp" alt="Side Slide icon">
+  </div>
+  <h1>Games by Ethan Gottlieb</h1>
+  <p>Small, colorful puzzle games, made by one person. Free on iPhone, iPad and Android.</p>
+  <span class="langs">Now in English, Español, Português, Français, Deutsch, Italiano, 日本語, 한국어 and 中文</span>
+</header>
+
 <main>
-<h1>Games by Ethan Gottlieb</h1>
-<p class="updated">Free puzzle games for iPhone, iPad and Android.</p>
+  <section class="game" style="--accent: #e94b57">
+    <div class="media phone">
+      <video src="media/roygbv.mp4" poster="media/roygbv.jpg" autoplay muted loop playsinline preload="metadata" aria-label="RoYgBv gameplay"></video>
+    </div>
+    <div>
+      <div class="title"><img src="img/roygbv.webp" alt=""><h2>RoYgBv</h2></div>
+      <p class="pitch">Mix colors to make the whole board one color. Red plus yellow makes orange, but red plus orange takes the red back out.</p>
+      <ul class="facts">
+        <li>500 handcrafted levels, plus a new puzzle every day</li>
+        <li>Daily Speed: race everyone on the same boards</li>
+        <li>Color symbols for color-blind players</li>
+      </ul>
+      <div class="badges">
+        <a href="https://apps.apple.com/app/id1568432072"><img src="img/appstore.svg" alt="Download on the App Store"></a>
+        <a class="play" href="https://play.google.com/store/apps/details?id=com.EGames.RoYgBv"><img src="img/googleplay.png" alt="Get it on Google Play"></a>
+      </div>
+      <p class="more"><a href="https://youtu.be/sXVK-zTJAuY">Trailer</a> · <a href="support/roygbv/">Support</a> · <a href="privacy/roygbv/">Privacy</a></p>
+    </div>
+  </section>
 
-<section class="game">
-  <img src="img/roygbv.webp" alt="RoYgBv icon">
-  <h2>RoYgBv</h2>
-  <p>Mix colors to make the whole board one color. Daily puzzles and Speed races.</p>
-  <div class="stores">
-    <a href="https://apps.apple.com/app/id1568432072">App Store</a>
-    <a href="https://play.google.com/store/apps/details?id=com.EGames.RoYgBv">Google Play</a>
-  </div>
-  <p class="more"><a href="support/roygbv/">Support</a> · <a href="privacy/roygbv/">Privacy</a></p>
-</section>
+  <section class="game" style="--accent: #4b9bf5">
+    <div class="media phone">
+      <video src="media/skydye.mp4" poster="media/skydye.jpg" autoplay muted loop playsinline preload="metadata" aria-label="Sky Dye gameplay"></video>
+    </div>
+    <div>
+      <div class="title"><img src="img/sky-dye.webp" alt=""><h2>Sky Dye</h2></div>
+      <p class="pitch">Mix paint, match the clouds and fly your balloon all the way to the Moon.</p>
+      <ul class="facts">
+        <li>Story mode through the layers of the Colorsphere</li>
+        <li>Shields, magnets and slow-mo to get out of tight spots</li>
+        <li>Survival mode: how high can you fly?</li>
+      </ul>
+      <div class="badges">
+        <a href="https://apps.apple.com/app/id1498702247"><img src="img/appstore.svg" alt="Download on the App Store"></a>
+        <a class="play" href="https://play.google.com/store/apps/details?id=com.EGames.Coloup"><img src="img/googleplay.png" alt="Get it on Google Play"></a>
+      </div>
+      <p class="more"><a href="https://youtu.be/QBIG5qkQaCY">Trailer</a> · <a href="support/sky-dye/">Support</a> · <a href="privacy/sky-dye/">Privacy</a></p>
+    </div>
+  </section>
 
-<section class="game">
-  <img src="img/sky-dye.webp" alt="Sky Dye icon">
-  <h2>Sky Dye</h2>
-  <p>Mix paint, match the clouds and fly your balloon all the way to the Moon!</p>
-  <div class="stores">
-    <a href="https://apps.apple.com/app/id1498702247">App Store</a>
-    <a href="https://play.google.com/store/apps/details?id=com.EGames.Coloup">Google Play</a>
-    <a href="https://youtu.be/QBIG5qkQaCY">Trailer</a>
-  </div>
-  <p class="more"><a href="support/sky-dye/">Support</a> · <a href="privacy/sky-dye/">Privacy</a></p>
-</section>
-
-<section class="game">
-  <img src="img/side-slide.webp" alt="Side Slide icon">
-  <h2>Side Slide</h2>
-  <p>Bend gravity to touch every side: 41 physics puzzles in four themed packs. No ads, nothing to buy.</p>
-  <div class="stores">
-    <a href="https://apps.apple.com/app/id1527390623">App Store</a>
-    <a href="https://play.google.com/store/apps/details?id=com.EGames.SideSlide">Google Play</a>
-    <a href="https://www.youtube.com/watch?v=AaIscKdDaAQ">Trailer</a>
-  </div>
-  <p class="more"><a href="support/side-slide/">Support</a> · <a href="privacy/side-slide/">Privacy</a></p>
-</section>
-
-<footer>Email: <a href="mailto:ethaniragottlieb@gmail.com">ethaniragottlieb@gmail.com</a> · <a href="support/">Support</a> · <a href="privacy/">Privacy policies</a></footer>
+  <section class="game wide" style="--accent: #8a5cf0">
+    <div class="media">
+      <video src="media/sideslide.mp4" poster="media/sideslide.jpg" autoplay muted loop playsinline preload="metadata" aria-label="Side Slide gameplay"></video>
+    </div>
+    <div>
+      <div class="title"><img src="img/side-slide.webp" alt=""><h2>Side Slide</h2></div>
+      <p class="pitch">Bend gravity to touch every side of the ring, in as few switches as you can.</p>
+      <ul class="facts">
+        <li>41 handmade levels in four themed packs</li>
+        <li>Lava, bouncy, boost and sticky walls that come alive</li>
+        <li>No ads, no purchases, no data collected</li>
+      </ul>
+      <div class="badges">
+        <a href="https://apps.apple.com/app/id1527390623"><img src="img/appstore.svg" alt="Download on the App Store"></a>
+        <a class="play" href="https://play.google.com/store/apps/details?id=com.EGames.SideSlide"><img src="img/googleplay.png" alt="Get it on Google Play"></a>
+      </div>
+      <p class="more"><a href="https://www.youtube.com/watch?v=AaIscKdDaAQ">Trailer</a> · <a href="support/side-slide/">Support</a> · <a href="privacy/side-slide/">Privacy</a></p>
+    </div>
+  </section>
 </main>
+
+<footer>
+  Questions or ideas? <a href="mailto:ethaniragottlieb@gmail.com">ethaniragottlieb@gmail.com</a> · <a href="support/">Support</a> · <a href="privacy/">Privacy policies</a><br>
+  App Store is a service mark of Apple Inc. Google Play is a trademark of Google LLC.
+</footer>
+
+<script>
+  // Respect reduced motion: show the still frame with controls instead of autoplaying.
+  // Otherwise only play the loops that are on screen.
+  (function () {
+    var videos = document.querySelectorAll("video");
+    var still = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    videos.forEach(function (v) {
+      if (still) { v.removeAttribute("autoplay"); v.pause(); v.controls = true; }
+    });
+    if (still || !("IntersectionObserver" in window)) return;
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) { if (e.isIntersecting) { e.target.play().catch(function () {}); } else { e.target.pause(); } });
+    }, { threshold: 0.25 });
+    videos.forEach(function (v) { io.observe(v); });
+  })();
+</script>
 </body>
 </html>
