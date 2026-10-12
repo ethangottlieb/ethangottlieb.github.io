@@ -169,5 +169,32 @@
     videos.forEach(function (v) { io.observe(v); });
   })();
 </script>
+<script>
+  // Keep untagged visits unchanged; tagged profile links measure channel-level campaigns.
+  (function () {
+    var source = new URLSearchParams(window.location.search).get("utm_source");
+    if (source === "ig") source = "instagram";
+    if (["youtube", "instagram", "creator"].indexOf(source) === -1) return;
+    var campaign = "gg26r2";
+    var referrer = new URLSearchParams({
+      utm_source: source,
+      utm_medium: source === "creator" ? "email" : "social",
+      utm_campaign: campaign
+    });
+    document.querySelectorAll(".badges a").forEach(function (link) {
+      var url = new URL(link.href);
+      if (url.hostname === "apps.apple.com") {
+        url.searchParams.set("pt", "10389800");
+        url.searchParams.set("ct", campaign + "_" + source);
+        url.searchParams.set("mt", "8");
+      } else if (url.hostname === "play.google.com") {
+        url.searchParams.set("referrer", referrer.toString());
+      } else {
+        return;
+      }
+      link.href = url.toString();
+    });
+  })();
+</script>
 </body>
 </html>
