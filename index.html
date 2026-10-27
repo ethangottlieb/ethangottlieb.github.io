@@ -38,15 +38,16 @@
     background: linear-gradient(90deg, #e94b57, #f39a2d, #f2d13b, #4caf50, #4b6bf5, #a35cd1); }
   .icons { display: flex; justify-content: center; gap: 18px; margin-bottom: 26px; }
   .icons img { width: 84px; height: 84px; border-radius: 19px; box-shadow: 0 8px 24px rgba(0, 0, 0, .35); }
-  .icons img:nth-child(1) { transform: rotate(-6deg); }
-  .icons img:nth-child(3) { transform: rotate(6deg); }
+  .icons a:first-child img { transform: rotate(-6deg); }
+  .icons a:last-child img { transform: rotate(6deg); }
+  .icons a:focus-visible { outline: 3px solid #fff; outline-offset: 6px; border-radius: 19px; }
   .hero h1 { font-size: clamp(30px, 6vw, 46px); line-height: 1.1; margin: 0 0 12px; letter-spacing: -.02em; }
   .hero p { margin: 0 auto; max-width: 560px; color: var(--hero-soft); font-size: 18px; }
   .langs { display: inline-block; margin-top: 18px; padding: 6px 14px; border-radius: 999px; background: rgba(255, 255, 255, .1); color: var(--hero-ink); font-size: 15px; }
 
   main { max-width: 980px; margin: 0 auto; padding: 40px 16px 24px; }
   .game { display: grid; grid-template-columns: 300px minmax(0, 1fr); gap: 36px; align-items: center; background: var(--card);
-    border-radius: 24px; padding: 32px; margin-bottom: 32px; box-shadow: var(--shadow); border-top: 5px solid var(--accent); }
+    border-radius: 24px; padding: 32px; margin-bottom: 32px; box-shadow: var(--shadow); border-top: 5px solid var(--accent); scroll-margin-top: 16px; }
   .game.wide { grid-template-columns: minmax(0, 1fr); }
   .media { display: flex; justify-content: center; }
   .media video { display: block; width: 100%; background: #000; }
@@ -59,7 +60,7 @@
   .facts { margin: 0 0 20px; padding: 0; list-style: none; color: var(--soft); }
   .facts li { padding-left: 22px; position: relative; margin-bottom: 6px; }
   .facts li::before { content: ""; position: absolute; left: 4px; top: .62em; width: 8px; height: 8px; border-radius: 50%; background: var(--accent); }
-  .badges { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; }
+  .badges { margin-bottom: 20px; display: flex; flex-wrap: wrap; align-items: center; gap: 12px; }
   .badges img { height: 48px; display: block; }
   .badges .play img { height: 71px; margin: -11px -10px; }
   .more { margin: 14px 0 0; font-size: 15px; color: var(--soft); }
@@ -69,6 +70,8 @@
 
   @media (max-width: 720px) {
     .game { grid-template-columns: minmax(0, 1fr); padding: 22px 18px; gap: 22px; }
+    .game > .media { order: 2; }
+    .game > .game-details { order: 1; }
     .phone video { max-width: 220px; }
     .icons img { width: 64px; height: 64px; border-radius: 15px; }
   }
@@ -76,73 +79,74 @@
 </head>
 <body>
 <header class="hero">
-  <div class="icons">
-    <img src="img/roygbv.webp" alt="RoYgBv icon">
-    <img src="img/sky-dye.webp" alt="Sky Dye icon">
-    <img src="img/side-slide.webp" alt="Side Slide icon">
-  </div>
+  <nav class="icons" aria-label="Choose a game">
+    <a href="#roygbv" aria-label="RoYgBv"><img src="img/roygbv.webp" alt=""></a>
+    <a href="#sky-dye" aria-label="Sky Dye"><img src="img/sky-dye.webp" alt=""></a>
+    <a href="#side-slide" aria-label="Side Slide"><img src="img/side-slide.webp" alt=""></a>
+  </nav>
   <h1>Games by Ethan Gottlieb</h1>
   <p>Small, colorful puzzle games, made by one person. Free on iPhone, iPad and Android.</p>
   <span class="langs">Now in English, Español, Português, Français, Deutsch, Italiano, 日本語, 한국어 and 中文</span>
 </header>
 
 <main>
-  <section class="game" style="--accent: #e94b57">
+  <section id="roygbv" class="game" style="--accent: #e94b57">
     <div class="media phone">
       <video src="media/roygbv.mp4" poster="media/roygbv.jpg" autoplay muted loop playsinline preload="metadata" aria-label="RoYgBv gameplay"></video>
     </div>
-    <div>
+    <div class="game-details">
       <div class="title"><img src="img/roygbv.webp" alt=""><h2>RoYgBv</h2></div>
       <p class="pitch">Mix colors to make the whole board one color. Red plus yellow makes orange, but red plus orange takes the red back out.</p>
-      <ul class="facts">
-        <li>500 handcrafted levels, plus a new puzzle every day</li>
-        <li>Daily Speed: race everyone on the same boards</li>
-        <li>Color symbols for color-blind players</li>
-      </ul>
       <div class="badges">
         <a href="https://apps.apple.com/app/id1568432072"><img src="img/appstore.svg" alt="Download on the App Store"></a>
         <a class="play" href="https://play.google.com/store/apps/details?id=com.EGames.RoYgBv"><img src="img/googleplay.png" alt="Get it on Google Play"></a>
       </div>
+      <ul class="facts">
+        <li>200 free handcrafted levels; optional Pro unlocks 300 more</li>
+        <li>A new puzzle every day</li>
+        <li>Daily Speed: race everyone on the same boards</li>
+        <li>Color symbols for color-blind players</li>
+      </ul>
       <p class="more"><a href="https://youtu.be/sXVK-zTJAuY">Trailer</a> · <a href="support/roygbv/">Support</a> · <a href="privacy/roygbv/">Privacy</a></p>
     </div>
   </section>
 
-  <section class="game" style="--accent: #4b9bf5">
+  <section id="sky-dye" class="game" style="--accent: #4b9bf5">
     <div class="media phone">
       <video src="media/skydye.mp4" poster="media/skydye.jpg" autoplay muted loop playsinline preload="metadata" aria-label="Sky Dye gameplay"></video>
     </div>
-    <div>
+    <div class="game-details">
       <div class="title"><img src="img/sky-dye.webp" alt=""><h2>Sky Dye</h2></div>
       <p class="pitch">Mix paint, match the clouds and fly your balloon all the way to the Moon.</p>
+      <div class="badges">
+        <a href="https://apps.apple.com/app/id1498702247"><img src="img/appstore.svg" alt="Download on the App Store"></a>
+        <a class="play" href="https://play.google.com/store/apps/details?id=com.EGames.Coloup"><img src="img/googleplay.png" alt="Get it on Google Play"></a>
+      </div>
       <ul class="facts">
         <li>Story mode through the layers of the Colorsphere</li>
         <li>Shields, magnets and slow-mo to get out of tight spots</li>
         <li>Survival mode: how high can you fly?</li>
       </ul>
-      <div class="badges">
-        <a href="https://apps.apple.com/app/id1498702247"><img src="img/appstore.svg" alt="Download on the App Store"></a>
-        <a class="play" href="https://play.google.com/store/apps/details?id=com.EGames.Coloup"><img src="img/googleplay.png" alt="Get it on Google Play"></a>
-      </div>
       <p class="more"><a href="https://youtu.be/QBIG5qkQaCY">Trailer</a> · <a href="support/sky-dye/">Support</a> · <a href="privacy/sky-dye/">Privacy</a></p>
     </div>
   </section>
 
-  <section class="game wide" style="--accent: #8a5cf0">
+  <section id="side-slide" class="game wide" style="--accent: #8a5cf0">
     <div class="media">
       <video src="media/sideslide.mp4" poster="media/sideslide.jpg" autoplay muted loop playsinline preload="metadata" aria-label="Side Slide gameplay"></video>
     </div>
-    <div>
+    <div class="game-details">
       <div class="title"><img src="img/side-slide.webp" alt=""><h2>Side Slide</h2></div>
       <p class="pitch">Bend gravity to touch every side of the ring, in as few switches as you can.</p>
+      <div class="badges">
+        <a href="https://apps.apple.com/app/id1527390623"><img src="img/appstore.svg" alt="Download on the App Store"></a>
+        <a class="play" href="https://play.google.com/store/apps/details?id=com.EGames.SideSlide"><img src="img/googleplay.png" alt="Get it on Google Play"></a>
+      </div>
       <ul class="facts">
         <li>41 handmade levels in four themed packs</li>
         <li>Lava, bouncy, boost and sticky walls that come alive</li>
         <li>No ads, no purchases, no data collected</li>
       </ul>
-      <div class="badges">
-        <a href="https://apps.apple.com/app/id1527390623"><img src="img/appstore.svg" alt="Download on the App Store"></a>
-        <a class="play" href="https://play.google.com/store/apps/details?id=com.EGames.SideSlide"><img src="img/googleplay.png" alt="Get it on Google Play"></a>
-      </div>
       <p class="more"><a href="https://www.youtube.com/watch?v=AaIscKdDaAQ">Trailer</a> · <a href="support/side-slide/">Support</a> · <a href="privacy/side-slide/">Privacy</a></p>
     </div>
   </section>
