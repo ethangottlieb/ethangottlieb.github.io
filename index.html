@@ -176,10 +176,16 @@
 <script>
   // Keep untagged visits unchanged; tagged profile links measure channel-level campaigns.
   (function () {
-    var source = new URLSearchParams(window.location.search).get("utm_source");
+    var params = new URLSearchParams(window.location.search);
+    var source = params.get("utm_source");
     if (source === "ig") source = "instagram";
-    if (["youtube", "instagram", "creator"].indexOf(source) === -1) return;
-    var campaign = "gg26r2";
+    if (["youtube", "instagram", "tiktok", "creator", "facebook", "linkedin"].indexOf(source) === -1) return;
+    // Old profile links retain their original campaign. Accept only bounded campaign tokens.
+    var campaign = params.get("utm_campaign") || "";
+    if (params.getAll("utm_campaign").length !== 1 || campaign.length > 48 ||
+        !/^gg\d{2}r[1-9]\d?(?:_[a-z0-9]+)*$/.test(campaign)) {
+      campaign = "gg26r2";
+    }
     var referrer = new URLSearchParams({
       utm_source: source,
       utm_medium: source === "creator" ? "email" : "social",
